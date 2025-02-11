@@ -29,18 +29,12 @@ class MainActivity : ComponentActivity() {
                     topBar = {
                         TopBar(
                             screen = screen.value,
-                            isBackButtonVisible = false
+                            isBackButtonVisible = true
                         )
                     }
                 ) { paddingValues ->
                     Box(modifier = Modifier.padding(paddingValues)) {
-                        /*when (screen.value) {
-                            Screens.MAIN -> {}
-                            Screens.SENSOR -> {}
-                            Screens.BATTERY -> {}
-                            Screens.NETWORK -> {}
-                            Screens.PROCESSING -> {}
-                        }*/
+
                     }
                 }
             }

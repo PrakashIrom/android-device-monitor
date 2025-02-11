@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AndroidDeviceMonitor</string>
+    <string name="app_name">Android Device Monitor</string>
     <string name="Sensor">Sensor</string>
     <string name="Battery">Battery</string>
     <string name="Network">Network</string>
