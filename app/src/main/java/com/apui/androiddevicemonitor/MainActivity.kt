@@ -5,13 +5,14 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.navigation.compose.rememberNavController
+import com.apui.androiddevicemonitor.ui.navigation.AppNavHost
+import com.apui.androiddevicemonitor.ui.screens.HomeScreen
 import com.apui.androiddevicemonitor.ui.theme.AndroidDeviceMonitorTheme
 import com.apui.androiddevicemonitor.utils.Screens
 import com.apui.androiddevicemonitor.utils.TopBar
@@ -33,9 +34,8 @@ class MainActivity : ComponentActivity() {
                         )
                     }
                 ) { paddingValues ->
-                    Box(modifier = Modifier.padding(paddingValues)) {
-
-                    }
+                    val navController = rememberNavController()
+                    AppNavHost(paddingValues=paddingValues, navController = navController)
                 }
             }
         }

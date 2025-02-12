@@ -3,5 +3,5 @@
     <string name="Sensor">Sensor</string>
     <string name="Battery">Battery</string>
     <string name="Network">Network</string>
-    <string name="Processing">Processing</string>
+    <string name="Processing">CPU and RAM</string>
 </resources>
