@@ -6,23 +6,28 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
 import com.apui.androiddevicemonitor.ui.cards.BatteryCard
 import com.apui.androiddevicemonitor.ui.cards.NetworkCard
 import com.apui.androiddevicemonitor.ui.cards.ProcessingCard
 import com.apui.androiddevicemonitor.ui.cards.SensorCard
 
 @Composable
-fun HomeScreen(paddingValues: PaddingValues) {
+fun HomeScreen(
+    paddingValues: PaddingValues,
+    navController: NavHostController,
+) {
+
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         modifier = Modifier.padding(paddingValues)
     ) {
         items(4) { index ->
             when (index) {
-                0 -> BatteryCard()
-                1 -> SensorCard()
-                2 -> ProcessingCard()
-                3 -> NetworkCard()
+                0 -> BatteryCard(navController)
+                1 -> SensorCard(navController)
+                2 -> ProcessingCard(navController)
+                3 -> NetworkCard(navController)
             }
         }
     }

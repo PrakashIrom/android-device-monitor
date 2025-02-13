@@ -44,8 +44,9 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.8.6")
 
     // koin for di
-    implementation("io.insert-koin:koin-core:3.5.0")
+    implementation("io.insert-koin:koin-core:4.0.1")
     implementation("io.insert-koin:koin-android:3.5.0")
+    implementation("io.insert-koin:koin-compose-viewmodel:4.0.1")
 
     implementation("androidx.core:core-splashscreen:1.0.1")
 

@@ -14,6 +14,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,13 +23,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.apui.androiddevicemonitor.ui.viewModel.TopBarViewModel
+import org.koin.compose.viewmodel.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBar(
-    screen: Screens,
-    isBackButtonVisible: Boolean = false,
-) {
+fun TopBar(viewModel: TopBarViewModel = koinViewModel()) {
+
+    val screen by viewModel.screen
+    val isBackButtonVisible by viewModel.isBackButtonVisible
+
     TopAppBar(
         title = {
             Row(
@@ -45,7 +49,9 @@ fun TopBar(
                     tint = Color.Unspecified
                 )
                 Spacer(modifier = Modifier.width(10.dp))
-                Text(stringResource(screen.title), fontSize = 20.sp, fontWeight = FontWeight.Bold)
+                Text(
+                    stringResource(screen.title), fontSize = 20.sp, fontWeight = FontWeight.Bold
+                )
             }
         },
         navigationIcon = {

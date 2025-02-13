@@ -6,18 +6,19 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.apui.androiddevicemonitor.ui.screens.HomeScreen
+import com.apui.androiddevicemonitor.ui.screens.battery.BatteryScreen
 
 @Composable
 fun AppNavHost(navController: NavHostController, paddingValues: PaddingValues){
     NavHost(navController = navController, startDestination = NavRoutes.Home.route){
         composable(NavRoutes.Home.route){
-            HomeScreen(paddingValues)
+            HomeScreen(paddingValues, navController)
         }
         composable(NavRoutes.Sensor.route){
 
         }
         composable(NavRoutes.Battery.route){
-
+            BatteryScreen(navController)
         }
         composable(NavRoutes.Processing.route){
 
