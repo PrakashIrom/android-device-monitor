@@ -63,6 +63,7 @@ fun TopBar(viewModel: TopBarViewModel = koinViewModel(), navController: NavHostC
                     contentDescription = "Back",
                     modifier = Modifier.clickable {
                         viewModel.currentTopBar(isBackButtonVisible = false, screen = Screens.HOME)
+                        navController.popBackStack()
                         navController.navigateUp()
                     })
             }

@@ -4,7 +4,7 @@ import com.apui.androiddevicemonitor.ui.viewModel.TopBarViewModel
 import org.koin.dsl.module
 
 val topBarViewModelModule = module {
-    single<TopBarViewModel>(){
+    single<TopBarViewModel>{
         TopBarViewModel()
     }
 }

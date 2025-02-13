@@ -1,6 +1,8 @@
 package com.apui.androiddevicemonitor
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -10,14 +12,22 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
+import com.apui.androiddevicemonitor.receivers.battery.BatteryLevelReceiver
 import com.apui.androiddevicemonitor.ui.navigation.AppNavHost
 import com.apui.androiddevicemonitor.ui.theme.AndroidDeviceMonitorTheme
 import com.apui.androiddevicemonitor.utils.TopBar
 
 class MainActivity : ComponentActivity() {
+
+    private lateinit var batteryReceiver: BatteryLevelReceiver
+
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        batteryReceiver = BatteryLevelReceiver()
+        val intentFilter = IntentFilter(Intent.ACTION_BATTERY_CHANGED)
+        registerReceiver(batteryReceiver, intentFilter)
+
         installSplashScreen()
         enableEdgeToEdge()
         setContent {
@@ -36,5 +46,10 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(batteryReceiver)
     }
 }
