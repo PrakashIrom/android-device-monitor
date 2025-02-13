@@ -22,13 +22,13 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AndroidDeviceMonitorTheme {
-
+                val navController = rememberNavController()
                 Scaffold(modifier = Modifier.fillMaxSize(),
                     topBar = {
-                        TopBar()
+                        TopBar(navController = navController)
                     }
                 ) { paddingValues ->
-                    val navController = rememberNavController()
+
                     AppNavHost(
                         paddingValues = paddingValues,
                         navController = navController

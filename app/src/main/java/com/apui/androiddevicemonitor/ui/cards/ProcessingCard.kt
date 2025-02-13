@@ -7,5 +7,8 @@ import com.apui.androiddevicemonitor.utils.CustomCard
 
 @Composable
 fun ProcessingCard(navController: NavHostController) {
-    CustomCard(titleId = R.string.Processing, iconRes = R.drawable.process)
+    CustomCard(
+        titleId = R.string.Processing,
+        iconRes = R.drawable.process,
+        onClick = { navController.navigate("processing") })
 }

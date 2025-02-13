@@ -1,11 +1,9 @@
 package com.apui.androiddevicemonitor.ui.viewModel
 
-import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.apui.androiddevicemonitor.utils.Screens
-import kotlinx.coroutines.flow.MutableStateFlow
 
 class TopBarViewModel : ViewModel() {
 
@@ -16,7 +14,6 @@ class TopBarViewModel : ViewModel() {
     val screen: State<Screens> = _screen
 
     fun currentTopBar(isBackButtonVisible: Boolean, screen: Screens) {
-        Log.d("TopBarViewModel", "Updating state: isBackButtonVisible=$isBackButtonVisible, screen=$screen")
         this._isBackButtonVisible.value = isBackButtonVisible
         this._screen.value = screen
     }

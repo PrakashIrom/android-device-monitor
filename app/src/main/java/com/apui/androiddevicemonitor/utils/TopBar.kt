@@ -1,5 +1,6 @@
 package com.apui.androiddevicemonitor.utils
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -23,12 +24,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.apui.androiddevicemonitor.ui.viewModel.TopBarViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBar(viewModel: TopBarViewModel = koinViewModel()) {
+fun TopBar(viewModel: TopBarViewModel = koinViewModel(), navController: NavHostController) {
 
     val screen by viewModel.screen
     val isBackButtonVisible by viewModel.isBackButtonVisible
@@ -56,7 +58,13 @@ fun TopBar(viewModel: TopBarViewModel = koinViewModel()) {
         },
         navigationIcon = {
             if (isBackButtonVisible) {
-                Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                    contentDescription = "Back",
+                    modifier = Modifier.clickable {
+                        viewModel.currentTopBar(isBackButtonVisible = false, screen = Screens.HOME)
+                        navController.navigateUp()
+                    })
             }
         },
     )

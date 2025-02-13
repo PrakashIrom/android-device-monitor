@@ -7,5 +7,8 @@ import com.apui.androiddevicemonitor.utils.CustomCard
 
 @Composable
 fun SensorCard(navController: NavHostController) {
-    CustomCard(titleId = R.string.Sensor, iconRes = R.drawable.sensor)
+    CustomCard(
+        titleId = R.string.Sensor,
+        iconRes = R.drawable.sensor,
+        onClick = { navController.navigate("sensor") })
 }

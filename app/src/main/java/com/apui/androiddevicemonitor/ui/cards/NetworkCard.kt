@@ -7,5 +7,8 @@ import com.apui.androiddevicemonitor.utils.CustomCard
 
 @Composable
 fun NetworkCard(navController: NavHostController) {
-    CustomCard(titleId = R.string.Network, iconRes = R.drawable.mobile_network)
+    CustomCard(
+        titleId = R.string.Network,
+        iconRes = R.drawable.mobile_network,
+        onClick = { navController.navigate("network") })
 }
