@@ -10,5 +10,6 @@ fun ProcessingCard(navController: NavHostController) {
     CustomCard(
         titleId = R.string.Processing,
         iconRes = R.drawable.process,
-        onClick = { navController.navigate("processing") })
+        onClick = { navController.navigate("processing") },
+    )
 }

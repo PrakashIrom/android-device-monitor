@@ -10,6 +10,7 @@ import com.apui.androiddevicemonitor.utils.battery.toHealthString
 import com.apui.androiddevicemonitor.utils.battery.toPluggedSourceString
 
 class BatteryReceiver(private val giveValue: (BatteryInfo) -> Unit) : BaseReceiver() {
+
     override fun onEventReceived(context: Context?, intent: Intent?) {
 
         intent ?: return
