@@ -12,5 +12,4 @@ fun BatteryScreen(viewModel: TopBarViewModel = koinViewModel()) {
     LaunchedEffect(Unit) {
         viewModel.currentTopBar(isBackButtonVisible = true, screen = Screens.BATTERY)
     }
-
 }

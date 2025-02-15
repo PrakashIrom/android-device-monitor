@@ -27,7 +27,7 @@ fun AppNavHost(navController: NavHostController, paddingValues: PaddingValues) {
             SensorScreen()
         }
         composable(NavRoutes.Battery.route) {
-            BatteryScreen(navController)
+            BatteryScreen()
         }
         composable(NavRoutes.Processing.route) {
             ProcessingScreen()
