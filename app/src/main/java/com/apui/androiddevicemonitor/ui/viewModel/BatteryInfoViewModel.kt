@@ -11,6 +11,8 @@ import kotlinx.coroutines.flow.StateFlow
 
 class BatteryInfoViewModel(application: Application) : AndroidViewModel(application) {
 
+    private var isReceiverRegistered = false
+
     private val _batteryInfo = MutableStateFlow(
         BatteryInfo(
             0,
@@ -27,14 +29,23 @@ class BatteryInfoViewModel(application: Application) : AndroidViewModel(applicat
     }
 
     init {
-        application.registerReceiver(batteryReceiver, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
+        if (!isReceiverRegistered) {
+            application.registerReceiver(
+                batteryReceiver,
+                IntentFilter(Intent.ACTION_BATTERY_CHANGED)
+            )
+            isReceiverRegistered = true
+        }
     }
 
     /*The onCleared() function in ViewModel is called when the ViewModel is about to be destroyed.
       This usually happens when the associated Activity or Fragment is finishing.*/
     override fun onCleared() {
         super.onCleared()
-        getApplication<Application>().unregisterReceiver(batteryReceiver)
+        if (isReceiverRegistered) {
+            getApplication<Application>().unregisterReceiver(batteryReceiver)
+            isReceiverRegistered = false
+        }
     }
 
 }
