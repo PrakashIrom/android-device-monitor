@@ -33,7 +33,6 @@ class BatteryReceiver(private val giveValue: (BatteryInfo) -> Unit) : BaseReceiv
             plugged = plugged.toPluggedSourceString(),
             temperature = temperature
         )
-
         giveValue(batteryInfo)
     }
 

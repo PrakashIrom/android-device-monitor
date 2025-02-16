@@ -3,7 +3,6 @@ package com.apui.androiddevicemonitor.ui.viewModel
 import android.app.Application
 import android.content.Intent
 import android.content.IntentFilter
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import com.apui.androiddevicemonitor.data.models.BatteryInfo
 import com.apui.androiddevicemonitor.receivers.BatteryReceiver
@@ -25,7 +24,6 @@ class BatteryInfoViewModel(application: Application) : AndroidViewModel(applicat
     val batteryInfo: StateFlow<BatteryInfo> = _batteryInfo
     private val batteryReceiver = BatteryReceiver { value ->
         _batteryInfo.value = value
-        Log.d("Battery Info: ", value.toString())
     }
 
     init {

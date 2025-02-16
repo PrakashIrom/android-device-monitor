@@ -16,7 +16,7 @@ fun Int.toHealthString(): String {
 fun Int.toChargingStatusString(): String {
     return when (this) {
         BatteryManager.BATTERY_STATUS_CHARGING -> "Charging"
-        BatteryManager.BATTERY_STATUS_FULL -> "Full"
+        BatteryManager.BATTERY_STATUS_FULL -> "Fully Charged"
         BatteryManager.BATTERY_STATUS_NOT_CHARGING -> "Not Charging"
         BatteryManager.BATTERY_STATUS_DISCHARGING -> "Discharging"
         else -> "Unknown"
