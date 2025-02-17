@@ -6,10 +6,10 @@ import android.content.Intent
 
 abstract class BaseReceiver : BroadcastReceiver() {
 
-    abstract fun onEventReceived(context: Context?, intent: Intent?)
+    abstract fun onEventReceived(intent: Intent?)
 
     override fun onReceive(context: Context?, intent: Intent?) {
-        onEventReceived(context, intent)
+        onEventReceived(intent)
     }
 
 }

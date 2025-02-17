@@ -15,6 +15,7 @@ import com.apui.androiddevicemonitor.ui.screens.sensor.SensorScreen
 @Composable
 fun AppNavHost(navController: NavHostController, paddingValues: PaddingValues) {
 
+    // To handle Android Back button/swipe to go back to the previous screen
     BackHandler(enabled = navController.previousBackStackEntry != null) {
         navController.navigateUp()
     }

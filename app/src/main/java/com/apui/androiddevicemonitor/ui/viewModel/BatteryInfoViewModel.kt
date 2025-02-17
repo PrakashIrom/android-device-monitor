@@ -5,12 +5,19 @@ import android.content.Intent
 import android.content.IntentFilter
 import androidx.lifecycle.AndroidViewModel
 import com.apui.androiddevicemonitor.data.models.BatteryInfo
+import com.apui.androiddevicemonitor.domain.usecases.batteryusecases.GetBatteryInfoUseCase
 import com.apui.androiddevicemonitor.receivers.BatteryReceiver
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-class BatteryInfoViewModel(application: Application) : AndroidViewModel(application) {
+class BatteryInfoViewModel(
+    application: Application,
+    private val getBatteryInfoUseCase: GetBatteryInfoUseCase,
+) : AndroidViewModel(application) {
 
+    /*isReceiverRegistered is used to check if the receiver is already registered because
+     "java.lang.IllegalArgumentException: Receiver not registered" happens when we try to unregister the
+    batteryReceiver in onCleared(), but it might not be registered at that point.*/
     private var isReceiverRegistered = false
 
     private val _batteryInfo = MutableStateFlow(
@@ -24,8 +31,12 @@ class BatteryInfoViewModel(application: Application) : AndroidViewModel(applicat
         )
     )
     val batteryInfo: StateFlow<BatteryInfo> = _batteryInfo
-    private val batteryReceiver = BatteryReceiver { value ->
-        _batteryInfo.value = value
+    private val batteryReceiver = BatteryReceiver { intent ->
+        updateBatteryInfo(intent)
+    }
+
+    private fun updateBatteryInfo(intent: Intent) {
+        _batteryInfo.value = getBatteryInfoUseCase(intent)
     }
 
     init {

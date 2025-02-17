@@ -1,5 +1,6 @@
 package com.apui.androiddevicemonitor.ui.screens.battery
 
+import android.app.Application
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -10,6 +11,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -18,14 +20,18 @@ import com.apui.androiddevicemonitor.ui.viewModel.BatteryInfoViewModel
 import com.apui.androiddevicemonitor.ui.viewModel.TopBarViewModel
 import com.apui.androiddevicemonitor.utils.Screens
 import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.parameter.parametersOf
 
 @Composable
 fun BatteryScreen(
     viewModel: TopBarViewModel = koinViewModel(),
-    infoViewModel: BatteryInfoViewModel = koinViewModel(),
 ) {
 
+    val application = LocalContext.current.applicationContext as Application
+    val infoViewModel: BatteryInfoViewModel =
+        koinViewModel(parameters = { parametersOf(application) })
     val batteryInfo by infoViewModel.batteryInfo.collectAsStateWithLifecycle()
+
     LaunchedEffect(Unit) {
         viewModel.currentTopBar(isBackButtonVisible = true, screen = Screens.BATTERY)
     }
