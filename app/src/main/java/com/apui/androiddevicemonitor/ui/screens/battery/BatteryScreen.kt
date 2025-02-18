@@ -52,7 +52,7 @@ fun BatteryScreenContent(batteryInfo: BatteryInfo) {
 
     Column(
         modifier = Modifier
-            .padding(top = 100.dp)
+            .padding(top = 110.dp)
             .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
