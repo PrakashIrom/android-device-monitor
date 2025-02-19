@@ -10,6 +10,5 @@ import org.koin.compose.viewmodel.koinViewModel
 fun SensorScreen(viewModel: TopBarViewModel = koinViewModel()) {
     LaunchedEffect(Unit) {
         viewModel.currentTopBar(isBackButtonVisible = true, screen = Screens.SENSOR)
-
     }
 }

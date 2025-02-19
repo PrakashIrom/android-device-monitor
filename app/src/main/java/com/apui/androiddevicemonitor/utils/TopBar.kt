@@ -30,29 +30,34 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBar(viewModel: TopBarViewModel = koinViewModel(), navController: NavHostController) {
-
+fun TopBar(
+    viewModel: TopBarViewModel = koinViewModel(),
+    navController: NavHostController,
+) {
     val screen by viewModel.screen
     val isBackButtonVisible by viewModel.isBackButtonVisible
 
     TopAppBar(
         title = {
             Row(
-                modifier = Modifier
-                    .padding(top = 10.dp)
-                    .fillMaxWidth(),
+                modifier =
+                    Modifier
+                        .padding(top = 10.dp)
+                        .fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 Icon(
                     painter = painterResource(id = screen.iconRes),
                     contentDescription = stringResource(screen.title),
                     modifier = Modifier.size(30.dp),
-                    tint = Color.Unspecified
+                    tint = Color.Unspecified,
                 )
                 Spacer(modifier = Modifier.width(10.dp))
                 Text(
-                    stringResource(screen.title), fontSize = 20.sp, fontWeight = FontWeight.Bold
+                    stringResource(screen.title),
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
                 )
             }
         },
@@ -61,11 +66,13 @@ fun TopBar(viewModel: TopBarViewModel = koinViewModel(), navController: NavHostC
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                     contentDescription = "Back",
-                    modifier = Modifier.clickable {
-                        viewModel.currentTopBar(isBackButtonVisible = false, screen = Screens.HOME)
-                        navController.popBackStack()
-                        navController.navigateUp()
-                    })
+                    modifier =
+                        Modifier.clickable {
+                            viewModel.currentTopBar(isBackButtonVisible = false, screen = Screens.HOME)
+                            navController.popBackStack()
+                            navController.navigateUp()
+                        },
+                )
             }
         },
     )

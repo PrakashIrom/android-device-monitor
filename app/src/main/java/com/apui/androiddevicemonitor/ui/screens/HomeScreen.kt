@@ -25,12 +25,12 @@ fun HomeScreen(
     LaunchedEffect(Unit) {
         viewModel.currentTopBar(
             isBackButtonVisible = false,
-            screen = Screens.HOME
+            screen = Screens.HOME,
         )
     }
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
-        modifier = Modifier.padding(paddingValues)
+        modifier = Modifier.padding(paddingValues),
     ) {
         items(4) { index ->
             when (index) {

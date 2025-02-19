@@ -8,4 +8,3 @@ val topBarViewModelModule = module {
         TopBarViewModel()
     }
 }
-

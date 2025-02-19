@@ -4,16 +4,17 @@ import com.apui.androiddevicemonitor.domain.model.RamUsageInfo
 import com.apui.androiddevicemonitor.domain.repository.performancerepo.RamUsageRepo
 import java.util.Locale
 
-class GetRamInfoUseCase(private val ramUsageRepo: RamUsageRepo) {
+class GetRamInfoUseCase(
+    private val ramUsageRepo: RamUsageRepo,
+) {
     operator fun invoke(): RamUsageInfo {
-
         val ramInfo = ramUsageRepo.getRamUsageInfo()
         val usageLimit = ramInfo.totalMemory - ramInfo.availableMemory
 
         return RamUsageInfo(
             totalMemory = formattedSize(ramInfo.totalMemory),
             availableMemory = formattedSize(ramInfo.availableMemory),
-            usedMemory = formattedSize(usageLimit)
+            usedMemory = formattedSize(usageLimit),
         )
     }
 

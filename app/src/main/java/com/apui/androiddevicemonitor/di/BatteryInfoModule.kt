@@ -9,17 +9,18 @@ import org.koin.android.ext.koin.androidApplication
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
-val batteryInfoModule = module {
-    single<BatteryInfoRepo> {
-        BatteryInfoRepoImpl()
+val batteryInfoModule =
+    module {
+        single<BatteryInfoRepo> {
+            BatteryInfoRepoImpl()
+        }
+        single {
+            androidApplication()
+        }
+        factory {
+            GetBatteryInfoUseCase(get())
+        }
+        viewModel { (application: Application) ->
+            BatteryInfoViewModel(application, get())
+        }
     }
-    single {
-        androidApplication()
-    }
-    factory {
-        GetBatteryInfoUseCase(get())
-    }
-    viewModel { (application: Application) ->
-        BatteryInfoViewModel(application, get())
-    }
-}

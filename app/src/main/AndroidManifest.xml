@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions" />
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -24,7 +26,7 @@
             </intent-filter>
         </activity>
         <receiver
-            android:name=".utils.receiver.BatteryLevelReceiver"
+            android:name=".utils.BaseReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BATTERY_CHANGED" />

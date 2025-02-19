@@ -14,26 +14,27 @@ class BatteryInfoViewModel(
     application: Application,
     private val getBatteryInfoUseCase: GetBatteryInfoUseCase,
 ) : AndroidViewModel(application) {
-
     /*isReceiverRegistered is used to check if the receiver is already registered because
      "java.lang.IllegalArgumentException: Receiver not registered" happens when we try to unregister the
     batteryReceiver in onCleared(), but it might not be registered at that point.*/
     private var isReceiverRegistered = false
 
-    private val _batteryInfo = MutableStateFlow(
-        BatteryInfo(
-            0,
-            "",
-            0.0,
-            "",
-            "",
-            0.0
+    private val _batteryInfo =
+        MutableStateFlow(
+            BatteryInfo(
+                0,
+                "",
+                0.0,
+                "",
+                "",
+                0.0,
+            ),
         )
-    )
     val batteryInfo: StateFlow<BatteryInfo> = _batteryInfo
-    private val batteryReceiver = BatteryReceiver { intent ->
-        updateBatteryInfo(intent)
-    }
+    private val batteryReceiver =
+        BatteryReceiver { intent ->
+            updateBatteryInfo(intent)
+        }
 
     private fun updateBatteryInfo(intent: Intent) {
         _batteryInfo.value = getBatteryInfoUseCase(intent)
@@ -43,7 +44,7 @@ class BatteryInfoViewModel(
         if (!isReceiverRegistered) {
             application.registerReceiver(
                 batteryReceiver,
-                IntentFilter(Intent.ACTION_BATTERY_CHANGED)
+                IntentFilter(Intent.ACTION_BATTERY_CHANGED),
             )
             isReceiverRegistered = true
         }
@@ -58,5 +59,4 @@ class BatteryInfoViewModel(
             isReceiverRegistered = false
         }
     }
-
 }

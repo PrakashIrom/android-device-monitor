@@ -20,27 +20,32 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun CustomCard(titleId: Int, iconRes: Int, onClick: () -> Unit = {}) {
+fun CustomCard(
+    titleId: Int,
+    iconRes: Int,
+    onClick: () -> Unit = {},
+) {
     Card(
-        modifier = Modifier
-            .size(height = 250.dp, width = 100.dp)
-            .padding(all = 10.dp)
-            .clickable { onClick() },
+        modifier =
+            Modifier
+                .size(height = 250.dp, width = 100.dp)
+                .padding(all = 10.dp)
+                .clickable { onClick() },
     ) {
         Column(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.padding(top = 10.dp)
+            modifier = Modifier.padding(top = 10.dp),
         ) {
             Icon(
                 painter = painterResource(id = iconRes),
                 contentDescription = stringResource(titleId),
-                tint = Color.Unspecified
+                tint = Color.Unspecified,
             )
             Spacer(modifier = Modifier.height(7.dp))
             Text(
                 stringResource(titleId),
-                fontWeight = FontWeight.W600
+                fontWeight = FontWeight.W600,
             )
         }
     }

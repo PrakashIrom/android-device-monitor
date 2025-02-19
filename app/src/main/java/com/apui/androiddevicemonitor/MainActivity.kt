@@ -5,14 +5,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.captionBar
-import androidx.compose.foundation.layout.captionBarIgnoringVisibility
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.statusBars
-import androidx.compose.foundation.layout.systemBars
-import androidx.compose.foundation.layout.waterfall
-import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -22,7 +15,6 @@ import com.apui.androiddevicemonitor.ui.theme.AndroidDeviceMonitorTheme
 import com.apui.androiddevicemonitor.utils.TopBar
 
 class MainActivity : ComponentActivity() {
-
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,18 +23,18 @@ class MainActivity : ComponentActivity() {
         setContent {
             AndroidDeviceMonitorTheme {
                 val navController = rememberNavController()
-                Scaffold(modifier = Modifier.fillMaxSize(),
+                Scaffold(
+                    modifier = Modifier.fillMaxSize(),
                     topBar = {
                         TopBar(navController = navController)
-                    }
+                    },
                 ) { paddingValues ->
                     AppNavHost(
                         paddingValues = paddingValues,
-                        navController = navController
+                        navController = navController,
                     )
                 }
             }
         }
     }
-
 }
