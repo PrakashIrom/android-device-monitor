@@ -10,5 +10,6 @@ fun SensorCard(navController: NavHostController) {
     CustomCard(
         titleId = R.string.Sensor,
         iconRes = R.drawable.sensor,
-        onClick = { navController.navigate("sensor") })
+        onClick = { navController.navigate("sensor") },
+    )
 }

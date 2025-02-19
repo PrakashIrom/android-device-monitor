@@ -23,10 +23,7 @@ import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
 
 @Composable
-fun BatteryScreen(
-    viewModel: TopBarViewModel = koinViewModel(),
-) {
-
+fun BatteryScreen(viewModel: TopBarViewModel = koinViewModel()) {
     val application = LocalContext.current.applicationContext as Application
     val infoViewModel: BatteryInfoViewModel =
         koinViewModel(parameters = { parametersOf(application) })
@@ -40,21 +37,22 @@ fun BatteryScreen(
 
 @Composable
 fun BatteryScreenContent(batteryInfo: BatteryInfo) {
-
-    val batteryDetails = listOf(
-        "Health" to batteryInfo.health,
-        "Percentage" to "${batteryInfo.percentage}%",
-        "Plugged" to batteryInfo.plugged,
-        "Status" to batteryInfo.status,
-        "Temperature" to "${batteryInfo.temperature}°C",
-        "Voltage" to "${batteryInfo.voltage}V"
-    )
+    val batteryDetails =
+        listOf(
+            "Health" to batteryInfo.health,
+            "Percentage" to "${batteryInfo.percentage}%",
+            "Plugged" to batteryInfo.plugged,
+            "Status" to batteryInfo.status,
+            "Temperature" to "${batteryInfo.temperature}°C",
+            "Voltage" to "${batteryInfo.voltage}V",
+        )
 
     Column(
-        modifier = Modifier
-            .padding(top = 110.dp)
-            .fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier =
+            Modifier
+                .padding(top = 110.dp)
+                .fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         batteryDetails.forEach { (label, value) ->
             BatteryInfoItem(label = label, value = value)
@@ -63,14 +61,17 @@ fun BatteryScreenContent(batteryInfo: BatteryInfo) {
 }
 
 @Composable
-fun BatteryInfoItem(label: String, value: String) {
+fun BatteryInfoItem(
+    label: String,
+    value: String,
+) {
     Row(
         modifier = Modifier.padding(vertical = 4.dp),
     ) {
         Text(
             text = "$label:",
             fontWeight = FontWeight.Bold,
-            //modifier = Modifier.weight(1f),
+            // modifier = Modifier.weight(1f),
         )
         Text(text = value, modifier = Modifier.weight(1f))
     }

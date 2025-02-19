@@ -9,7 +9,6 @@ import com.apui.androiddevicemonitor.utils.battery.toHealthString
 import com.apui.androiddevicemonitor.utils.battery.toPluggedSourceString
 
 class BatteryInfoRepoImpl : BatteryInfoRepo {
-
     override fun getBatteryInfo(intent: Intent?): BatteryInfo {
         intent ?: return BatteryInfo(0, "Unknown", 0.0, "Unknown", "Not Plugged", 0.0)
 
@@ -23,16 +22,16 @@ class BatteryInfoRepoImpl : BatteryInfoRepo {
         val temperature =
             intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, -1).div(10.0)
         val batteryPercentage = if (scale > 0) (level * 100) / scale else 0
-        val batteryInfo = BatteryInfo(
-            percentage = batteryPercentage,
-            health = health.toHealthString(),
-            voltage = voltage,
-            status = status.toChargingStatusString(),
-            plugged = plugged.toPluggedSourceString(),
-            temperature = temperature
-        )
+        val batteryInfo =
+            BatteryInfo(
+                percentage = batteryPercentage,
+                health = health.toHealthString(),
+                voltage = voltage,
+                status = status.toChargingStatusString(),
+                plugged = plugged.toPluggedSourceString(),
+                temperature = temperature,
+            )
 
         return batteryInfo
     }
-
 }

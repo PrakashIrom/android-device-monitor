@@ -10,5 +10,6 @@ fun NetworkCard(navController: NavHostController) {
     CustomCard(
         titleId = R.string.Network,
         iconRes = R.drawable.mobile_network,
-        onClick = { navController.navigate("network") })
+        onClick = { navController.navigate("network") },
+    )
 }
