@@ -1,6 +1,7 @@
 package com.apui.androiddevicemonitor
 
 import android.app.Application
+import com.apui.androiddevicemonitor.di.appOpsPermissionViewModelModule
 import com.apui.androiddevicemonitor.di.batteryInfoModule
 import com.apui.androiddevicemonitor.di.systemInfoModule
 import com.apui.androiddevicemonitor.di.topBarViewModelModule
@@ -12,7 +13,12 @@ class MyApplication : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@MyApplication)
-            modules(topBarViewModelModule, batteryInfoModule, systemInfoModule)
+            modules(
+                topBarViewModelModule,
+                batteryInfoModule,
+                systemInfoModule,
+                appOpsPermissionViewModelModule,
+            )
         }
     }
 }
