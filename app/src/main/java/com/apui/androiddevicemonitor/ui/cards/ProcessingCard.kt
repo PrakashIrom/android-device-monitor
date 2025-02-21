@@ -1,20 +1,28 @@
 package com.apui.androiddevicemonitor.ui.cards
 
 import android.app.AppOpsManager
+import android.provider.Settings
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.navigation.NavHostController
 import com.apui.androiddevicemonitor.R
 import com.apui.androiddevicemonitor.ui.viewModel.AppOpsPermissionViewModel
+import com.apui.androiddevicemonitor.utils.CustomBottomSheet
 import com.apui.androiddevicemonitor.utils.CustomCard
 import com.apui.androiddevicemonitor.utils.permissionutil.AppOpsPermissionState
 import org.koin.compose.viewmodel.koinViewModel
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProcessingCard(
     navController: NavHostController,
@@ -22,7 +30,9 @@ fun ProcessingCard(
 ) {
     val permissionState by viewModel.appOpsPermissionState.collectAsState()
     val context = LocalContext.current
-    val lifeCycleOwner = androidx.lifecycle.compose.LocalLifecycleOwner.current
+    val lifeCycleOwner = LocalLifecycleOwner.current
+    val showBottomSheet = remember { mutableStateOf(false) }
+    val sheetState = rememberModalBottomSheetState()
 
     DisposableEffect(lifeCycleOwner) {
         val observer =
@@ -41,14 +51,25 @@ fun ProcessingCard(
         titleId = R.string.Processing,
         iconRes = R.drawable.process,
         onClick = {
-            viewModel.checkAppOpsPermission(
-                context,
-                AppOpsManager.OPSTR_GET_USAGE_STATS,
-                android.provider.Settings.ACTION_USAGE_ACCESS_SETTINGS,
-            )
+            showBottomSheet.value = true
             if (permissionState == AppOpsPermissionState.GRANTED) {
                 navController.navigate("processing")
             }
         },
     )
+
+    if (showBottomSheet.value && permissionState != AppOpsPermissionState.GRANTED) {
+        CustomBottomSheet(
+            onDismissRequest = { showBottomSheet.value = false },
+            sheetState = sheetState,
+            title = "Usage Access Permission",
+            contentText = "Requires usage access permission to get the usage information.",
+        ) {
+            viewModel.checkAppOpsPermission(
+                context,
+                AppOpsManager.OPSTR_GET_USAGE_STATS,
+                Settings.ACTION_USAGE_ACCESS_SETTINGS,
+            )
+        }
+    }
 }
