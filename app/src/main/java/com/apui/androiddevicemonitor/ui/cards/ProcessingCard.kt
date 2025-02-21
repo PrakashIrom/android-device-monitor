@@ -12,7 +12,7 @@ import androidx.navigation.NavHostController
 import com.apui.androiddevicemonitor.R
 import com.apui.androiddevicemonitor.ui.viewModel.AppOpsPermissionViewModel
 import com.apui.androiddevicemonitor.utils.CustomCard
-import com.apui.androiddevicemonitor.utils.permissionutil.PermissionState
+import com.apui.androiddevicemonitor.utils.permissionutil.AppOpsPermissionState
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -46,7 +46,7 @@ fun ProcessingCard(
                 AppOpsManager.OPSTR_GET_USAGE_STATS,
                 android.provider.Settings.ACTION_USAGE_ACCESS_SETTINGS,
             )
-            if (permissionState == PermissionState.GRANTED) {
+            if (permissionState == AppOpsPermissionState.GRANTED) {
                 navController.navigate("processing")
             }
         },

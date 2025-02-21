@@ -1,6 +1,6 @@
 package com.apui.androiddevicemonitor.utils.permissionutil
 
-enum class PermissionState {
+enum class AppOpsPermissionState {
     GRANTED,
     REQUIRED,
     DENIED,
