@@ -62,8 +62,8 @@ fun ProcessingCard(
         CustomBottomSheet(
             onDismissRequest = { showBottomSheet.value = false },
             sheetState = sheetState,
-            title = "Usage Access Permission",
-            contentText = "Requires usage access permission to get the usage information.",
+            title = "Usage Data Access Permission",
+            contentText = "You need to allow permission for Usage Data Access to get the usage information.",
         ) {
             viewModel.checkAppOpsPermission(
                 context,
