@@ -6,6 +6,7 @@ import android.content.Context
 import com.apui.androiddevicemonitor.data.repository.performancerepo.QueryEventsRepoImpl
 import com.apui.androiddevicemonitor.data.repository.performancerepo.RamUsageRepoImpl
 import com.apui.androiddevicemonitor.data.repository.performancerepo.RunningServicesRepoImpl
+import com.apui.androiddevicemonitor.domain.repository.performancerepo.QueryEventsRepo
 import com.apui.androiddevicemonitor.domain.repository.performancerepo.RamUsageRepo
 import com.apui.androiddevicemonitor.domain.repository.performancerepo.RunningServicesRepo
 import com.apui.androiddevicemonitor.domain.usecases.performanceusecases.GetQueryEventsUseCase
@@ -45,11 +46,11 @@ val systemInfoModule =
         single {
             androidContext().getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
         }
-        single<QueryEventsRepoImpl> {
+        single<QueryEventsRepo> {
             QueryEventsRepoImpl(get())
         }
         single {
-            GetQueryEventsUseCase(get())
+            GetQueryEventsUseCase(get(), androidContext())
         }
         viewModel {
             QueryEventsViewModel(get())

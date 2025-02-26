@@ -57,5 +57,6 @@ fun ProcessingScreenContents(
                 Text("Process Id: ${runningServices[runningService].pid}")
             }
         }
+        QueryEventsScreen()
     }
 }
